@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-07-27 01:10:05
- * @LastEditTime: 2020-07-27 01:12:54
+ * @LastEditTime: 2020-07-27 22:03:35
  * @LastEditors: your name
  * @Description:
  * @FilePath: /learn-go-with-tests/arrays/sum.go
@@ -9,12 +9,12 @@
  */
 package main
 
-func Sum(numbers [5]int) (sum int) {
-	for i := 0; i < 5; i++ {
-		sum += numbers[i]
-	}
-	return sum
-}
+// func Sum(numbers [5]int) (sum int) {
+// 	for i := 0; i < 5; i++ {
+// 		sum += numbers[i]
+// 	}
+// 	return sum
+// }
 
 // func Sum(numbers [5]int) int {
 // 	sum := 0
@@ -23,3 +23,18 @@ func Sum(numbers [5]int) (sum int) {
 // 	}
 // 	return sum
 // }
+
+/**
+ * @description: range 会迭代数组，每次迭代都会返回数组元素的索引和值
+				 使用 _ 空白标志符 来忽略索引
+ * @param {type}
+ * @return:
+*/
+func Sum(numbers []int) int {
+	sum := 0
+	for _, number := range numbers {
+		sum += number
+	}
+
+	return sum
+}
