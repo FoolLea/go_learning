@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-07-27 01:10:05
- * @LastEditTime: 2020-07-27 22:03:35
+ * @LastEditTime: 2020-07-27 22:45:10
  * @LastEditors: your name
  * @Description:
  * @FilePath: /learn-go-with-tests/arrays/sum.go
@@ -37,4 +37,41 @@ func Sum(numbers []int) int {
 	}
 
 	return sum
+}
+
+// func SumAll(numbersToSum ...[]int) (sums []int) {
+// 	lengthOfNumbers := len(numbersToSum)
+
+// 	// make 可以在创建切片的时候指定我们需要的长度和容量
+// 	sums = make([]int, lengthOfNumbers)
+
+// 	for i, numbers := range numbersToSum {
+// 		sums[i] = Sum(numbers)
+// 	}
+
+// 	return
+// }
+
+// func SumAll(numbersToSum ...[]int) []int {
+// 	lengthOfNumbers := len(numbersToSum)
+
+// 	// make 可以在创建切片的时候指定我们需要的长度和容量
+// 	sums := make([]int, lengthOfNumbers)
+
+// 	for i, numbers := range numbersToSum {
+// 		sums[i] = Sum(numbers)
+// 	}
+
+// 	return sums
+// }
+
+func SumAll(numbersToSum ...[]int) []int {
+	var sums []int
+
+	for _, numbers := range numbersToSum {
+		// append 函数，它能为切片追加一个新值
+		sums = append(sums, Sum(numbers))
+	}
+
+	return sums
 }

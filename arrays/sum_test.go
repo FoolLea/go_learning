@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-07-27 01:07:45
- * @LastEditTime: 2020-07-27 22:05:21
+ * @LastEditTime: 2020-07-27 22:27:41
  * @LastEditors: your name
  * @Description:
  * @FilePath: /learn-go-with-tests/arrays/sum_test.go
@@ -9,7 +9,10 @@
  */
 package main
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestSum(t *testing.T) {
 	// numbers := [5]int{1, 2, 3, 4, 5}
@@ -44,4 +47,19 @@ func TestSum(t *testing.T) {
 			t.Errorf("got %d want %d given, %v", got, want, numbers)
 		}
 	})
+}
+
+func TestSumAll(t *testing.T) {
+	got := SumAll([]int{1, 2}, []int{0, 9})
+	want := []int{3, 9}
+
+	// 不能对切片使用等号运算符
+	// if got != want {
+	// 	t.Errorf("got %v want %v", got, want)
+	// }
+
+	// reflect.DeepEqual 不是「类型安全」
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("got %v want %v", got, want)
+	}
 }
