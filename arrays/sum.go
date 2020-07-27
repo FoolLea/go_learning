@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-07-27 01:10:05
- * @LastEditTime: 2020-07-27 22:45:10
+ * @LastEditTime: 2020-07-27 22:55:11
  * @LastEditors: your name
  * @Description:
  * @FilePath: /learn-go-with-tests/arrays/sum.go
@@ -74,4 +74,19 @@ func SumAll(numbersToSum ...[]int) []int {
 	}
 
 	return sums
+}
+
+func SumAllTails(numbersToSum ...[]int) (sums []int) {
+	for _, numbers := range numbersToSum {
+		if len(numbers) == 0 {
+			sums = append(sums, 0)
+		} else {
+			// slice[low:high] 获取部分切片
+			tail := numbers[1:]
+			// append 函数，它能为切片追加一个新值
+			sums = append(sums, Sum(tail))
+		}
+	}
+
+	return
 }
