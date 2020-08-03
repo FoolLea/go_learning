@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-08-03 21:11:08
- * @LastEditTime: 2020-08-03 21:26:42
+ * @LastEditTime: 2020-08-03 23:48:36
  * @LastEditors: your name
  * @Description:
  * @FilePath: /learn-go-with-tests/structs/premeter.go
@@ -14,14 +14,28 @@ type Rectangle struct {
 	Height float64
 }
 
+type Circle struct {
+	Radius float64
+}
+
 func Premeter(width float64, height float64) float64 {
 	return 2 * (width + height)
 }
 
-func Area(width float64, height float64) float64 {
-	return width * height
+// func Area(width float64, height float64) float64 {
+// 	return width * height
+// }
+
+// 申明函数
+// func Area(rectangle Rectangle) float64 {
+// 	return rectangle.Width * rectangle.Height
+// }
+
+// 申明方法
+func (r Rectangle) Area() float64 {
+	return 0
 }
 
-func Area(rectangle Rectangle) float64 {
-	return rectangle.Width * rectangle.Height
+func (c Circle) Area() float64 {
+	return 0
 }

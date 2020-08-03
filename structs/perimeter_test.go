@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-08-03 21:07:52
- * @LastEditTime: 2020-08-03 21:25:48
+ * @LastEditTime: 2020-08-03 23:47:06
  * @LastEditors: your name
  * @Description:
  * @FilePath: /learn-go-with-tests/structs/perimeter_test.go
@@ -21,13 +21,25 @@ func TestPremiter(t *testing.T) {
 }
 
 func TestArea(t *testing.T) {
-	// got := Area(10.0, 10.0)
-	// want := 100.0
-	rectangle := Rectangle{10.0, 10.0}
-	got := Area(rectangle)
-	want := 100.0
+	t.Run("rectangle", func(t *testing.T) {
+		// got := Area(10.0, 10.0)
+		// want := 100.0
+		rectangle := Rectangle{10.0, 10.0}
+		got := rectangle.Area(rectangle)
+		want := 100.0
 
-	if got != want {
-		t.Errorf("got %.2f want %.2f", got, want)
-	}
+		if got != want {
+			t.Errorf("got %.2f want %.2f", got, want)
+		}
+	})
+
+	t.Run("circle", func(t *testing.T) {
+		circle := Circle{10}
+		got := circle.Area(circle)
+		want := 314.16
+
+		if got != want {
+			t.Errorf("got %.2f want %.2f", got, want)
+		}
+	})
 }
