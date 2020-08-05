@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-08-03 21:07:52
- * @LastEditTime: 2020-08-04 23:25:46
+ * @LastEditTime: 2020-08-05 21:21:14
  * @LastEditors: your name
  * @Description:
  * @FilePath: /learn-go-with-tests/structs/perimeter_test.go
@@ -9,7 +9,10 @@
  */
 package structs
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestPremiter(t *testing.T) {
 	got := Premeter(10.0, 10.0)
@@ -65,4 +68,22 @@ func TestArea2(t *testing.T) {
 		checkArea(t, circle, 314.1592653589793)
 	})
 
+}
+
+func TestArea3(t *testing.T) {
+	areaTests := []struct {
+		shpae Shape
+		want  float64
+	}{
+		{Rectangle{12, 6}, 72.0},
+		{Circle{10}, 314.1592653589793},
+	}
+
+	for _, tt := range areaTests {
+		fmt.Println(tt)
+		got := tt.shpae.Area()
+		if got != tt.want {
+			t.Errorf("got %.2f want %.2f", got, tt.want)
+		}
+	}
 }
