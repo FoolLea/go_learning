@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-08-03 21:11:08
- * @LastEditTime: 2020-08-04 23:48:05
+ * @LastEditTime: 2020-08-05 21:30:15
  * @LastEditors: your name
  * @Description:
  * @FilePath: /learn-go-with-tests/structs/premeter.go
@@ -26,6 +26,11 @@ type Shape interface {
 	Area() float64
 }
 
+type Triangle struct {
+	Base   float64
+	Height float64
+}
+
 func Premeter(width float64, height float64) float64 {
 	return 2 * (width + height)
 }
@@ -48,4 +53,8 @@ func (r Rectangle) Area() float64 {
 // Circle 有一个返回值类型为 float64 的方法 Area，所以它满足接口 Shape
 func (c Circle) Area() float64 {
 	return math.Pi * c.Radius * c.Radius
+}
+
+func (t Triangle) Area() float64 {
+	return t.Base * t.Height * 0.5
 }
