@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-08-03 21:07:52
- * @LastEditTime: 2020-08-05 21:48:15
+ * @LastEditTime: 2020-08-05 21:57:05
  * @LastEditors: your name
  * @Description:
  * @FilePath: /learn-go-with-tests/structs/perimeter_test.go
@@ -91,10 +91,12 @@ func TestArea3(t *testing.T) {
 
 	for _, tt := range areaTests {
 		// fmt.Println(tt)
-		// got := tt.shpae.Area()
-		// if got != tt.want {
-		// 	t.Errorf("got %.2f want %.2f", got, tt.want)
+		// got := tt.shape.Area()
+		// if got != tt.hasArea {
+		// 	t.Errorf("%#v got %.2f want %.2f", tt.shape, got, tt.hasArea)
 		// }
+
+		// 在每个用例中使用 t.Run，测试用例的错误输出中会包含用例的名字
 		t.Run(tt.name, func(t *testing.T) {
 			got := tt.shape.Area()
 			if got != tt.hasArea {
