@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-08-08 18:15:10
- * @LastEditTime: 2020-08-08 23:25:04
+ * @LastEditTime: 2020-08-09 21:53:56
  * @LastEditors: your name
  * @Description:
  * @FilePath: /learn-go-with-tests/finance/wallet.go
@@ -10,6 +10,7 @@
 package finance
 
 import (
+	"errors"
 	"fmt"
 )
 
@@ -26,6 +27,9 @@ type Wallet struct {
 	balance Bitcoin
 }
 
+// var 关键字允许我们定义包的全局值
+var InsufficientFundsError = errors.New("cannot withdraw, insufficient funds")
+
 // 指针让我们 指向 某个值，然后修改它。
 // 所以，我们不是拿钱包的副本，而是拿一个指向钱包的指针，这样我们就可以改变它
 func (w *Wallet) Deposit(amount Bitcoin) {
@@ -41,7 +45,13 @@ func (b Bitcoin) String() string {
 	return fmt.Sprintf("%d BTC", b)
 }
 
-func (w *Wallet) Withdraw(amount Bitcoin) {
+func (w *Wallet) Withdraw(amount Bitcoin) error {
 	fmt.Println("address of balance in Withdraw is", &w.balance)
+
+	if amount > w.balance {
+		// return errors.New("cannot withdraw, insufficient funds")
+		return InsufficientFundsError
+	}
 	w.balance -= amount
+	return nil
 }
