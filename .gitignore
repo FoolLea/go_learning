@@ -8,3 +8,5 @@ _book/
 *.mobi
 *.pdf
 .vscode/
+.gitignore
+go.sum
