@@ -20,6 +20,13 @@ func assertString(t *testing.T, got string, want string) {
 	}
 }
 
+func assertError(t *testing.T, got, want error) {
+	t.Helper()
+	if got != want {
+		t.Errorf("got error '%s' want '%s'", got, want)
+	}
+}
+
 func TestSearch2(t *testing.T) {
 	dictionary := Dictionary{"test": "this is a test"}
 
@@ -31,16 +38,32 @@ func TestSearch2(t *testing.T) {
 		assertString(t, got, want)
 	})
 
-	t.Run("nnknow word", func(t *testing.T) {
+	t.Run("unknow word", func(t *testing.T) {
 		// 返回第二个参数，它是一个 Error 类型
-		_, err := dictionary.Search("unknown")
-		want := "could not find the word you were looking for"
+		_, got := dictionary.Search("unknown")
+		// want := "could not find the word you were looking for"
 
-		if err == nil {
-			t.Fatal("expected to get an error.")
-		}
+		// if err == nil {
+		// 	t.Fatal("expected to get an error.")
+		// }
 
-		assertString(t, err.Error(), want)
+		// assertString(t, err.Error(), want)
+		assertError(t, got, ErrNotFound)
 	})
 
+}
+
+func TestAdd(t *testing.T) {
+	dictionary := Dictionary{}
+	dictionary.Add("test", "this is just a test")
+
+	want := "this is just a test"
+	got, err := dictionary.Search("test")
+	if err != nil {
+		t.Fatal("should find added word:", err)
+	}
+
+	if want != got {
+		t.Errorf("got '%s' want '%s'", got, want)
+	}
 }
