@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-08-10 23:25:57
- * @LastEditTime: 2020-08-12 22:21:50
+ * @LastEditTime: 2020-08-14 22:04:17
  * @LastEditors: your name
  * @Description:
  * @FilePath: /learn-go-with-tests/dictionary/dictionary.go
