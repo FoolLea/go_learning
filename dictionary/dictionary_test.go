@@ -1,3 +1,12 @@
+/*
+ * @Author: your name
+ * @Date: 2020-08-10 23:22:49
+ * @LastEditTime: 2020-08-19 00:25:48
+ * @LastEditors: your name
+ * @Description:
+ * @FilePath: /learn-go-with-tests/dictionary/dictionary_test.go
+ * @可以输入预定的版权声明、个性签名、空行等
+ */
 package dictionary
 
 import (
@@ -54,7 +63,7 @@ func TestSearch2(t *testing.T) {
 }
 
 func TestAdd(t *testing.T) {
-	dictionary := Dictionary{}
+	// dictionary := Dictionary{}
 	// dictionary.Add("test", "this is just a test")
 
 	// want := "this is just a test"
@@ -67,15 +76,30 @@ func TestAdd(t *testing.T) {
 	// 	t.Errorf("got '%s' want '%s'", got, want)
 	// }
 
-	word := "test"
-	definition := "this is just a test"
+	t.Run("new word", func(t *testing.T) {
+		dictionary := Dictionary{}
+		word := "test"
+		definition := "this is just a test"
 
-	dictionary.Add(word, definition)
+		err := dictionary.Add(word, definition)
 
-	assertDefinition(t, dictionary, word, definition)
+		assertError(t, err, nil)
+
+		assertDefinition(t, dictionary, word, definition)
+	})
+
+	t.Run("existing word", func(t *testing.T) {
+		word := "test"
+		definition := "this is just a test"
+		dictionary := Dictionary{word: definition}
+		err := dictionary.Add(word, "new test")
+
+		assertError(t, err, ErrWordExists)
+		assertDefinition(t, dictionary, word, definition)
+	})
 }
 
-func assertDefinition(t *tesing.T, dictionary Dictionary, word, definition string) {
+func assertDefinition(t *testing.T, dictionary Dictionary, word, definition string) {
 	t.Helper()
 
 	got, err := dictionary.Search(word)

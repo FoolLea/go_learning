@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-08-10 23:25:57
- * @LastEditTime: 2020-08-14 22:04:17
+ * @LastEditTime: 2020-08-19 00:22:37
  * @LastEditors: your name
  * @Description:
  * @FilePath: /learn-go-with-tests/dictionary/dictionary.go
@@ -13,7 +13,10 @@ import (
 	"errors"
 )
 
-var ErrNotFound = errors.New("could not find the word you were looking for")
+var (
+	ErrNotFound   = errors.New("could not find the word you were looking for")
+	ErrWordExists = errors.New("cannot add word because it already exists")
+)
 
 type Dictionary map[string]string
 
@@ -34,6 +37,11 @@ func (d Dictionary) Search(word string) (string, error) {
 	return definition, nil
 }
 
-func (d Dictionary) Add(word, definition string) {
+// func (d Dictionary) Add(word, definition string) {
+// 	d[word] = definition
+// }
+
+func (d Dictionary) Add(word, definition string) error {
 	d[word] = definition
+	return nil
 }
